@@ -20,7 +20,9 @@ void menu()
 void invalido(int *n)
 {
     printf("\nNumero invalido, digite novamente: ");
-    scanf("%d", *n);
+    fflush(stdin);
+    scanf("%d", &*n);
+    system("cls");
 }
 //funcoes da opcao 1
 void somar(float n)
@@ -74,8 +76,7 @@ void scan(float *n)
     printf("\nDigite o raio: ");
     scanf("%f", &*n);
 }
-float validar3(float n)
-{
+float validar3(float n){
     while (n < 0)
     {
         printf("\nNumero invalido, digite novamente: ");
@@ -83,13 +84,38 @@ float validar3(float n)
     }
     return (n);
 }
-void volume(float r)
-{
+void volume(float r){
     float volume = 0, pi = 3.14;
     volume = (4 * pi * (pow(r, 3))) / 3;
     printf("O volume da esfera e %.2f", volume);
 }
+//funcoes da opcao 4
+float in (float n){
+    printf("Digite um numero para gerar o fatorial: ");
+    scanf("%f", &n);
+    printf("teste");
+    return(n);
+}
+float validar4(float *n){
+    while(*n<=0){
+        printf("Numero invalido, digite novamente: ");
+        *n=in(*n);
+    }
+}
+void fatorial (float n){
+    float total=1, cont=1;
 
+    if(n==0){
+        printf("\nO fatorial de 0 é 1!\n");
+    }
+    else{
+        while(cont<=n){
+            total=total*cont;
+            cont++;
+        }
+        printf("O fatorial e %.2f", total);
+    }
+}
 
 int main()
 {
@@ -100,7 +126,7 @@ int main()
         menu();
         scanf("%d", &opc);
 
-        if(opc<0||opc>5)
+        if(opc<0 || opc>5)
             invalido(&opc);
         else if(opc==1)
         {
@@ -173,7 +199,13 @@ int main()
             novamente=1;
             while(novamente==1)
             {
-                printf("Voce entro na opcao 4");
+                float num;
+
+                printf("\nFATORIAL\n");
+                printf("========\n");
+                num=in(num);
+                validar4(&num);
+                fatorial(num);
 
                 printf("\n\nDeseja executar novamete? Se sim digite 1 se nao insira qualquer tecla: ");
                 scanf("%d", &novamente);
